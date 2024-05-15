@@ -1,5 +1,6 @@
 # Agendamento Espaco Infantil
-<h2>Projeto de POO usando Java</h2>
+
+Programa Java que gerencia agendamentos para um espaço infantil
 
 <h3>Especificações</h3>
 
