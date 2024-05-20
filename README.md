@@ -20,8 +20,10 @@ Programa Java que gerencia agendamentos para um espaço infantil
 - Editar
 - Cancelar
 
-Eventos
+<h4>Eventos</h4>
 - Visualizar
 - Criar
+  - Especificação para cuidados especiais
+  - Verificar se há conflitos de horários
 - Editar
 - Excluir
