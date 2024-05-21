@@ -26,17 +26,17 @@ RQ1: Permitir que os clientes se inscrevam  nos eventos. <br>
 RQ2: Permitir que os clientes vejam os horários dos eventos. <br>
 RQ3: Visualizar a data dos eventos. <br>
 
-<h4>Requisitos da ES3</h4>
+<h4>Requisitos da ES3:</h4>
 RQ1: Verificador de horários de eventos, para impedir eventos no mesmo horário e data. <br>
 RQ2: Verificador de quantidade vagas para não exceder o máximo. <br>
 RQ3: Verificador de horário de reserva, para impedir reservas em horários ja usados. <br>
 
-<h4>Requisitos da ES4</h4>
+<h4>Requisitos da ES4:</h4>
 RQ1: Colocar dados pessoais. <br>
 RQ2: Colocar dados da(s) criança(s). <br>
 RQ3: Colocar horário da reserva desejada. <br>
 
-<h4>Requisitos da ES5</h4>
+<h4>Requisitos da ES5:</h4>
 RQ1: Colocar dados pessoais. <br>
 RQ2: Permitir que administradores aprovem ou rejeitem solicitações. <br>
 RQ3: Criar, ler, atualizar e excluir (CRUD) eventos. <br>
