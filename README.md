@@ -40,3 +40,5 @@ RQ3: Criar, ler, atualizar e excluir (CRUD) eventos. <br>
 RQ4: Definir quantidade de vagas. <br>
 RQ5: Definição das datas de início e fim dos eventos. <br>
 RQ6: Permitir a edição das reservas pelos administradores. <br>
+
+<img src="/ProjetoPOO-Casos%20de%20uso-1.drawio.png" />
