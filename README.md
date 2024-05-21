@@ -41,4 +41,6 @@ RQ4: Definir quantidade de vagas. <br>
 RQ5: Definição das datas de início e fim dos eventos. <br>
 RQ6: Permitir a edição das reservas pelos administradores. <br>
 
+<h4>Caso de uso:</h4>
+
 <img src="/ProjetoPOO-Casos%20de%20uso-1.drawio.png" />
