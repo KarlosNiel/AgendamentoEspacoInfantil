@@ -17,14 +17,11 @@ ES4: Cadastro de cliente: O sistema deve permitir o cadastro dos clientes. <br>
 ES5: Cadastro de Administrador: O sistema deve permitir o cadastro dos administradores. <br>
 
 <h4>Requisitos da ES1:</h4>
-RQ1: Criar, ler, atualizar e excluir (CRUD) reserva. <br>
-RQ2: Definição das datas de início e fim de reserva. <br>
-RQ3: Permitir que os clientes vejam seus horários. <br>
+RQ1: Solicitar, ler, atualizar e excluir (CRUD) reserva. <br>
 
 <h4>Requisitos da ES2:</h4>
-RQ1: Permitir que os clientes se inscrevam  nos eventos. <br>
-RQ2: Permitir que os clientes vejam os horários dos eventos. <br>
-RQ3: Visualizar a data dos eventos. <br>
+RQ1: Permitir que os clientes se inscrevam nos eventos. <br>
+RQ2: Permitir que os clientes vejam os horários e datas dos eventos. <br>
 
 <h4>Requisitos da ES3:</h4>
 RQ1: Verificador de horários de eventos, para impedir eventos no mesmo horário e data. <br>
@@ -40,7 +37,6 @@ RQ3: Colocar horário da reserva desejada. <br>
 RQ1: Colocar dados pessoais. <br>
 RQ2: Permitir que administradores aprovem ou rejeitem solicitações. <br>
 RQ3: Criar, ler, atualizar e excluir (CRUD) eventos. <br>
-RQ4: Fornecer uma busca para reserva especifica. <br>
-RQ5: Definir quantidade de vagas. <br>
-RQ6: Definição das datas de início e fim dos eventos. <br>
-RQ7: Permitir a edição das reservas pelos administradores. <br>
+RQ4: Definir quantidade de vagas. <br>
+RQ5: Definição das datas de início e fim dos eventos. <br>
+RQ6: Permitir a edição das reservas pelos administradores. <br>
