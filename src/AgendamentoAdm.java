@@ -1,6 +1,6 @@
 import Exceptions.DataNaoEncontradaException;
 import Exceptions.EntradaInesperadaException;
-
+import java.util.Iterator;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -19,8 +19,10 @@ public class AgendamentoAdm {
     }
 
     public void limparInscritosEventos() {
-        for (String limparEventos: Datas.listaInscricaoNosEventos) {
-            Datas.listaInscricaoNosEventos.remove(limparEventos);
+        Iterator<String> iterator = Datas.listaInscricaoNosEventos.iterator();
+        while (iterator.hasNext()) {
+            iterator.next();
+            iterator.remove();
         }
     }
 
@@ -43,28 +45,17 @@ public class AgendamentoAdm {
 
         System.out.println("Digite 'solicitar' para remover datas da lista geral ou Digite 'confirmado' para remover da lista de confirmação");
 
-        if (scanner.nextLine().equals("solicitar".toLowerCase())) {
-            LocalDateTime dateTime = LocalDateTime.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+        String escolha = scanner.nextLine();
+        LocalDateTime dateTime = LocalDateTime.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
 
-            for (LocalDateTime data: Datas.listaSolicitacaoCliente) {
-                if (dateTime == data) {
-                    Datas.listaSolicitacaoCliente.remove(data);
-                } else {
-                    throw new DataNaoEncontradaException("Data não encontrada em nossa Agenda");
-                }
+        if (escolha.equalsIgnoreCase("solicitar")) {
+            if (!Datas.listaSolicitacaoCliente.remove(dateTime)) {
+                throw new DataNaoEncontradaException("Data não encontrada em nossa Agenda");
             }
-
-        } else if (scanner.nextLine().equals("confirmado".toLowerCase())) {
-            LocalDateTime dateTime = LocalDateTime.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
-
-            for (LocalDateTime data: Datas.listaDatasConfirmadas) {
-                if (dateTime == data) {
-                    Datas.listaDatasConfirmadas.remove(data);
-                } else {
-                    throw new DataNaoEncontradaException("Data não encontrada em nossa Agenda");
-                }
+        } else if (escolha.equalsIgnoreCase("confirmado")) {
+            if (!Datas.listaDatasConfirmadas.remove(dateTime)) {
+                throw new DataNaoEncontradaException("Data não encontrada em nossa Agenda");
             }
-
         }
     }
 
@@ -85,6 +76,4 @@ public class AgendamentoAdm {
         this.adm = adm;
         return this;
     }
-
-
 }
