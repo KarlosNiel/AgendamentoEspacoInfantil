@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -140,5 +141,21 @@ public class Main {
             }
         }
         scanner.close();
+
+//        Cliente cliente = new Cliente("Romario", 46);
+//
+//        AgendamentoCliente agendamentoCliente = new AgendamentoCliente();
+//        AgendamentoAdm agendamentoAdm = new AgendamentoAdm();
+//
+//        agendamentoCliente.requerirAgendamento("11/02/2025 15:30");
+//        agendamentoAdm.Agendar();
+//
+//        int vagas = agendamentoAdm.AbrirEvento("sla", 3);
+//
+//        agendamentoCliente.inscricaoEventos("sla", "Mario");
+//
+//        agendamentoCliente.mostrarEventos(vagas);
+//
+//        System.out.println(Datas.listaInscricaoNosEventos);
     }
 }

@@ -4,21 +4,23 @@ import java.util.ArrayList;
 
 public class AgendamentoCliente {
     private Cliente cliente;
-    private ArrayList<LocalDateTime> listaSolicitacaoCliente = new ArrayList<>();
+
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
     public void requerirAgendamento(String data) {
         LocalDateTime dateTime = LocalDateTime.parse(data, formatter);
-        listaSolicitacaoCliente.add(dateTime);
+        Datas.listaSolicitacaoCliente.add(dateTime);
+        Datas.listaDatasGerais.add(dateTime);
     }
 
     public void solicitarRemocao(String data) {
         LocalDateTime dateTime = LocalDateTime.parse(data, formatter);
-        listaSolicitacaoCliente.remove(dateTime);
+        Datas.listaSolicitacaoCliente.remove(dateTime);
+        Datas.listaDatasGerais.remove(dateTime);
     }
 
     public void exibirSolicitacoes() {
-        for (LocalDateTime dateTime : listaSolicitacaoCliente) {
+        for (LocalDateTime dateTime : Datas.listaSolicitacaoCliente) {
             System.out.println(dateTime);
         }
     }
@@ -39,11 +41,19 @@ public class AgendamentoCliente {
         }
     }
 
-    public void mostrarEventosEInscritos() {
-        for (String eventos: Datas.listaEventosGerais) {
-            System.out.println(eventos);
+    public void mostrarEventos(int vagasTotal) {
+        int contador = 0;
+        for (String inscricoes : Datas.listaInscricaoNosEventos) {
+            contador++;
         }
 
+        for (String eventos : Datas.listaEventosGerais) {
+            System.out.println(eventos + " " + (vagasTotal - contador) + " vagas.");
+        }
+
+    }
+
+    public void mostrarInscritosEvento() {
         for (String inscritos: Datas.listaInscricaoNosEventos) {
             System.out.println(inscritos);
         }
