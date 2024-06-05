@@ -45,7 +45,8 @@ public class Main {
                                 ==== Menu Administrador ====
                                 1. Exibir Eventos
                                 2. Limpar Inscrições de Eventos
-                                3. Voltar ao Menu Principal""");
+                                3. Mostrar Inscritos nos Eventos
+                                4. Voltar ao Menu Principal""");
 
                         int adminChoice = scanner.nextInt();
                         scanner.nextLine();
@@ -66,6 +67,11 @@ public class Main {
                                 System.out.println();
                                 break;
                             case 3:
+                                System.out.println("==== Inscritos nos eventos ====");
+                                agendamentoCliente.mostrarInscritosEvento();
+                                System.out.println();
+                                break;
+                            case 4:
                                 adminMenu = false;
                                 break;
                             default:
@@ -117,13 +123,13 @@ public class Main {
                                 System.out.println();
                                 break;
                             case 5:
-                                System.out.println("Digite a data para solicitar remoção do agendamento (dd/MM/yyyy HH:mm):");
+                                System.out.println("Digite a data para solicitar remoção (dd/MM/yyyy HH:mm):");
                                 String dataRemocao = scanner.nextLine();
                                 agendamentoCliente.solicitarRemocao(dataRemocao);
                                 System.out.println();
                                 break;
                             case 6:
-                                System.out.println("Solicitações de agendamento:");
+                                System.out.println("==== Solicitações de agendamento ====");
                                 agendamentoCliente.exibirSolicitacoes();
                                 System.out.println();
                                 break;
@@ -136,28 +142,12 @@ public class Main {
                     }
                     break;
                 case 3:
+                    System.out.println("Encerrando o programa...");
                     running = false;
                     break;
                 default:
                     System.out.println("Opção inválida. Tente novamente.");
             }
         }
-        scanner.close();
-
-//        Cliente cliente = new Cliente("Romario", 46);
-//
-//        AgendamentoCliente agendamentoCliente = new AgendamentoCliente();
-//        AgendamentoAdm agendamentoAdm = new AgendamentoAdm();
-//
-//        agendamentoCliente.requerirAgendamento("11/02/2025 15:30");
-//        agendamentoAdm.Agendar();
-//
-//        int vagas = agendamentoAdm.AbrirEvento("sla", 3);
-//
-//        agendamentoCliente.inscricaoEventos("sla", "Mario");
-//
-//        agendamentoCliente.mostrarEventos(vagas);
-//
-//        System.out.println(Datas.listaInscricaoNosEventos);
     }
 }
