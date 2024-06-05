@@ -1,9 +1,6 @@
 import Exceptions.NaoEstaInscritoNesteEventoException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-
 public class AgendamentoCliente {
     private Cliente cliente;
 
@@ -28,38 +25,32 @@ public class AgendamentoCliente {
     }
 
     public void inscricaoEventos(String evento, String nomeDaCrianca) {
-        for (String eventos: Datas.listaEventosGerais) {
-            if (evento.equals(eventos)) {
-                Datas.listaInscricaoNosEventos.add(nomeDaCrianca + " Está inscrita em: " + evento);
-            }
+        if (Datas.listaEventosGerais.contains(evento)) {
+            Datas.listaInscricaoNosEventos.add(nomeDaCrianca + " Está inscrita em: " + evento);
         }
     }
 
     public void removerInscricaoEvento(String evento, String nomeDaCrianca) throws NaoEstaInscritoNesteEventoException {
-        for (String eventos: Datas.listaEventosGerais) {
-            if (evento.equals(eventos)) {
-                Datas.listaInscricaoNosEventos.remove(nomeDaCrianca + " Está inscrita em: " + evento);
-            } else {
-                throw new NaoEstaInscritoNesteEventoException("Não está escrito nesse evento!");
-            }
+        String inscricao = nomeDaCrianca + " Está inscrita em: " + evento;
+        if (!Datas.listaInscricaoNosEventos.remove(inscricao)) {
+            throw new NaoEstaInscritoNesteEventoException("Não está inscrito nesse evento!");
         }
     }
 
     public void mostrarEventos(int vagasTotal) {
-        int contador = 0;
-        for (String inscricoes : Datas.listaInscricaoNosEventos) {
-            contador++;
-        }
-
+        int contador = Datas.listaInscricaoNosEventos.size();
         for (String eventos : Datas.listaEventosGerais) {
             System.out.println(eventos + " " + (vagasTotal - contador) + " vagas.");
         }
-
     }
 
     public void mostrarInscritosEvento() {
-        for (String inscritos: Datas.listaInscricaoNosEventos) {
-            System.out.println(inscritos);
+        if (Datas.listaInscricaoNosEventos.isEmpty()) {
+            System.out.println("Nenhum inscrito encontrado.");
+        } else {
+            for (String inscritos : Datas.listaInscricaoNosEventos) {
+                System.out.println(inscritos);
+            }
         }
     }
 }
