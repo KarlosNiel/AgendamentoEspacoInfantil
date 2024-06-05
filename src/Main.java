@@ -3,27 +3,51 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Digite o nome do administrador:");
+        String nomeAdmin = scanner.nextLine();
+        System.out.println("Digite a idade do administrador:");
+        int idadeAdmin = scanner.nextInt();
+        System.out.println("Digite o CPF do administrador:");
+        int cpfAdmin = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Digite a senha do administrador:");
+        String senhaAdmin = scanner.nextLine();
 
-        Administrador admin = new Administrador("Pâmella", 19, 123456789)
-                .setSenha("admin123");
+        Administrador admin = new Administrador(nomeAdmin, idadeAdmin, cpfAdmin).setSenha(senhaAdmin);
 
-        Criancas crianca1 = new Criancas("Laninha", 10);
-        Criancas crianca2 = new Criancas("Darth Vader", 1);
+        System.out.println("Digite o nome do cliente:");
+        scanner.nextLine();
+        String nomeCliente = scanner.nextLine();
+        System.out.println("Digite a idade do cliente:");
+        int idadeCliente = scanner.nextInt();
+        System.out.println("Digite o email do cliente:");
+        scanner.nextLine();
+        String emailCliente = scanner.nextLine();
+        System.out.println("Digite a senha do cliente:");
+        String senhaCliente = scanner.nextLine();
+        System.out.println("Digite a quantidade de crianças do cliente:");
+        int quantidadeCriancas = scanner.nextInt();
 
-        Cliente cliente = new Cliente("Maria", 20)
-                .setEmail("maria@example.com")
-                .setSenha(1234)
-                .setQuantidadeCriancas(2)
-                .adicionarCrianca(crianca1)
-                .adicionarCrianca(crianca2);
+        Cliente cliente = new Cliente(nomeCliente, idadeCliente)
+                .setEmail(emailCliente)
+                .setSenha(senhaCliente)
+                .setQuantidadeCriancas(quantidadeCriancas);
+
+        for (int i = 0; i < quantidadeCriancas; i++) {
+            scanner.nextLine();
+            System.out.println("Digite o nome da criança " + (i + 1) + ":");
+            String nomeCrianca = scanner.nextLine();
+            System.out.println("Digite a idade da criança " + (i + 1) + ":");
+            int idadeCrianca = scanner.nextInt();
+            Criancas crianca = new Criancas(nomeCrianca, idadeCrianca);
+            cliente.adicionarCrianca(crianca);
+        }
 
         AgendamentoAdm agendamentoAdm = new AgendamentoAdm()
                 .setAdm(admin)
                 .AbrirEvento("Festa de Aniversário", 20)
                 .AbrirEvento("Caça ao Tesouro", 6);
-
         AgendamentoCliente agendamentoCliente = new AgendamentoCliente();
-
         boolean running = true;
 
         while (running) {

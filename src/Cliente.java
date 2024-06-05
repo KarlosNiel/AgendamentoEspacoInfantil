@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Cliente extends Pessoa{
     private String email;
-    private int senha;
+    private String senha;
     private int quantidadeCriancas;
     private ArrayList<Criancas> listaCriancas = new ArrayList<>();
 
@@ -32,11 +32,11 @@ public class Cliente extends Pessoa{
         return this;
     }
 
-    public int getSenha() {
+    public String getSenha() {
         return senha;
     }
 
-    public Cliente setSenha(int senha) {
+    public Cliente setSenha(String senha) {
         this.senha = senha;
         return this;
     }
