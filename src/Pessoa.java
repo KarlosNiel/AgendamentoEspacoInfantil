@@ -6,14 +6,23 @@ public abstract class Pessoa {
         this.nome = nome;
         this.idade = idade;
     }
+
     public String getNome() {
         return nome;
     }
+
     public int getIdade() {
         return idade;
     }
+
     @Override
     public String toString() {
-        return "Nome: " + nome + ", Idade: " + idade;
+        // muda cor no terminal
+        String ANSI_RESET = "\u001B[0m";
+        String ANSI_YELLOW = "\u001B[33m";
+        String ANSI_BLUE = "\u001B[34m";
+
+        return ANSI_YELLOW + "Nome: " + ANSI_RESET + nome + ", " +
+                ANSI_BLUE + "Idade: " + ANSI_RESET + idade;
     }
 }

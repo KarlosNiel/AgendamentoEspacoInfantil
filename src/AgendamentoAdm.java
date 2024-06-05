@@ -8,9 +8,9 @@ public class AgendamentoAdm {
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
     Scanner scanner = new Scanner(System.in);
 
-    public int AbrirEvento(String evento, int vagas) {
+    public AgendamentoAdm AbrirEvento(String evento, int vagas) {
         Datas.listaEventosGerais.add(evento);
-        return vagas;
+        return this;
     }
 
     public void fecharEvento(String evento){
@@ -55,16 +55,18 @@ public class AgendamentoAdm {
         return cliente;
     }
 
-    public void setCliente(Cliente cliente) {
+    public AgendamentoAdm setCliente(Cliente cliente) {
         this.cliente = cliente;
+        return this;
     }
 
     public Administrador getAdm() {
         return adm;
     }
 
-    public void setAdm(Administrador adm) {
+    public AgendamentoAdm setAdm(Administrador adm) {
         this.adm = adm;
+        return this;
     }
 
 

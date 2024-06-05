@@ -12,8 +12,9 @@ public class Cliente extends Pessoa{
         super(nome, idade);
     }
 
-    public void adicionarCrianca(Criancas crianca) {
+    public Cliente adicionarCrianca(Criancas crianca) {
         listaCriancas.add(crianca);
+        return this;
     }
 
     public void exibirCriancas() {
@@ -26,23 +27,26 @@ public class Cliente extends Pessoa{
         return email;
     }
 
-    public void setEmail(String email) {
+    public Cliente setEmail(String email) {
         this.email = email;
+        return this;
     }
 
     public int getSenha() {
         return senha;
     }
 
-    public void setSenha(int senha) {
+    public Cliente setSenha(int senha) {
         this.senha = senha;
+        return this;
     }
 
     public int getQuantidadeCriancas() {
         return quantidadeCriancas;
     }
 
-    public void setQuantidadeCriancas(int quantidadeCriancas) {
+    public Cliente setQuantidadeCriancas(int quantidadeCriancas) {
         this.quantidadeCriancas = quantidadeCriancas;
+        return this;
     }
 }

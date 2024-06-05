@@ -4,34 +4,35 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        Administrador admin = new Administrador("Pâmella", 19, 123456789);
-        admin.setSenha("admin123");
-
-        Cliente cliente = new Cliente("Maria", 20);
-        cliente.setEmail("maria@example.com");
-        cliente.setSenha(1234);
-        cliente.setQuantidadeCriancas(2);
+        Administrador admin = new Administrador("Pâmella", 19, 123456789)
+                .setSenha("admin123");
 
         Criancas crianca1 = new Criancas("Laninha", 10);
         Criancas crianca2 = new Criancas("Darth Vader", 1);
-        cliente.adicionarCrianca(crianca1);
-        cliente.adicionarCrianca(crianca2);
 
-        AgendamentoAdm agendamentoAdm = new AgendamentoAdm();
-        agendamentoAdm.setAdm(admin);
+        // Aplicado (method chaining) para simplificar o código
+        Cliente cliente = new Cliente("Maria", 20)
+                .setEmail("maria@example.com")
+                .setSenha(1234)
+                .setQuantidadeCriancas(2)
+                .adicionarCrianca(crianca1)
+                .adicionarCrianca(crianca2);
 
-        agendamentoAdm.AbrirEvento("Festa de Aniversário");
-        agendamentoAdm.AbrirEvento("Caça ao Tesouro");
+        AgendamentoAdm agendamentoAdm = new AgendamentoAdm()
+                .setAdm(admin)
+                .AbrirEvento("Festa de Aniversário", 20)
+                .AbrirEvento("Caça ao Tesouro", 6);
 
         AgendamentoCliente agendamentoCliente = new AgendamentoCliente();
 
         boolean running = true;
 
         while (running) {
-            System.out.println("Menu Principal");
-            System.out.println("1. Entrar como Administrador");
-            System.out.println("2. Entrar como Cliente");
-            System.out.println("3. Encerrar");
+            System.out.println("""
+                    ==== Menu Principal =====
+                    1. Entrar como Administrador
+                    2. Entrar como Cliente
+                    3. Encerrar""");
 
             int mainChoice = scanner.nextInt();
             scanner.nextLine();
@@ -40,19 +41,20 @@ public class Main {
                 case 1:
                     boolean adminMenu = true;
                     while (adminMenu) {
-                        System.out.println("Menu Administrador");
-                        System.out.println("1. Exibir Eventos");
-                        System.out.println("2. Limpar Inscrições de Eventos");
-                        System.out.println("3. Voltar ao Menu Principal");
+                        System.out.println("""
+                                ==== Menu Administrador ====
+                                1. Exibir Eventos
+                                2. Limpar Inscrições de Eventos
+                                3. Voltar ao Menu Principal""");
 
                         int adminChoice = scanner.nextInt();
                         scanner.nextLine();
 
                         switch (adminChoice) {
                             case 1:
-                                System.out.println("Eventos disponíveis:");
+                                System.out.println("==== Eventos disponíveis ====");
                                 for (String evento : Datas.listaEventosGerais) {
-                                    System.out.println(evento);
+                                    System.out.println(" - " + evento);
                                 }
                                 System.out.println();
                                 break;
@@ -60,7 +62,7 @@ public class Main {
                                 System.out.println("Limpando inscrições de eventos...");
                                 agendamentoAdm.limparInscritosEventos();
                                 System.out.println("Eventos e inscritos após limpeza:");
-                                agendamentoCliente.mostrarEventosEInscritos();
+                                agendamentoCliente.mostrarInscritosEvento();
                                 System.out.println();
                                 break;
                             case 3:
@@ -74,7 +76,7 @@ public class Main {
                 case 2:
                     boolean clienteMenu = true;
                     while (clienteMenu) {
-                        System.out.println("Menu Cliente");
+                        System.out.println("==== Menu Cliente ====");
                         System.out.println("1. Exibir Crianças");
                         System.out.println("2. Exibir Eventos");
                         System.out.println("3. Inscrever Criança em Evento");
@@ -88,19 +90,19 @@ public class Main {
 
                         switch (clienteChoice) {
                             case 1:
-                                System.out.println("Crianças cadastradas no sistema:");
+                                System.out.println("==== Crianças cadastradas ====");
                                 cliente.exibirCriancas();
                                 System.out.println();
                                 break;
                             case 2:
-                                System.out.println("Eventos disponíveis:");
+                                System.out.println("==== Eventos disponíveis ====");
                                 for (String evento : Datas.listaEventosGerais) {
-                                    System.out.println(evento);
+                                    System.out.println(" - " + evento);
                                 }
                                 System.out.println();
                                 break;
                             case 3:
-                                System.out.println("Inscrever criança em evento");
+                                System.out.println("==== Inscrever criança em evento ====");
                                 System.out.println("Digite o nome do evento:");
                                 String evento = scanner.nextLine();
                                 System.out.println("Digite o nome da criança:");
