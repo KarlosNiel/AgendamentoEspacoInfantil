@@ -1,3 +1,5 @@
+import Exceptions.NaoEstaInscritoNesteEventoException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -33,10 +35,12 @@ public class AgendamentoCliente {
         }
     }
 
-    public void removerInscricaoEvento(String evento, String nomeDaCrianca) {
+    public void removerInscricaoEvento(String evento, String nomeDaCrianca) throws NaoEstaInscritoNesteEventoException {
         for (String eventos: Datas.listaEventosGerais) {
             if (evento.equals(eventos)) {
                 Datas.listaInscricaoNosEventos.remove(nomeDaCrianca + " Está inscrita em: " + evento);
+            } else {
+                throw new NaoEstaInscritoNesteEventoException("Não está escrito nesse evento!");
             }
         }
     }
