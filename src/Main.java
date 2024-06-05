@@ -10,7 +10,6 @@ public class Main {
         Criancas crianca1 = new Criancas("Laninha", 10);
         Criancas crianca2 = new Criancas("Darth Vader", 1);
 
-        // Aplicado (method chaining) para simplificar o código
         Cliente cliente = new Cliente("Maria", 20)
                 .setEmail("maria@example.com")
                 .setSenha(1234)
