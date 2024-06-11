@@ -12,8 +12,9 @@ public class Administrador extends Pessoa {
         return senha;
     }
 
-    public void setSenha(String senha) {
+    public Administrador setSenha(String senha) {
         this.senha = senha;
+        return this;
     }
 
     public AgendamentoAdm getAgendamento() {

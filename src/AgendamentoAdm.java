@@ -1,3 +1,6 @@
+import Exceptions.DataNaoEncontradaException;
+import Exceptions.EntradaInesperadaException;
+import java.util.Iterator;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -5,48 +8,53 @@ import java.util.Scanner;
 public class AgendamentoAdm {
     private Administrador adm;
     private Cliente cliente;
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-    Scanner scanner = new Scanner(System.in);
 
-    public int AbrirEvento(String evento, int vagas) {
+    public AgendamentoAdm AbrirEvento(String evento, int vagas) {
         Datas.listaEventosGerais.add(evento);
-        return vagas;
+        return this;
     }
 
-    public void fecharEvento(String evento){
+    public void fecharEvento(String evento) {
         Datas.listaEventosGerais.remove(evento);
     }
 
     public void limparInscritosEventos() {
-        for (String limparEventos: Datas.listaInscricaoNosEventos) {
-            Datas.listaInscricaoNosEventos.remove(limparEventos);
+        Iterator<String> iterator = Datas.listaInscricaoNosEventos.iterator();
+        while (iterator.hasNext()) {
+            iterator.next();
+            iterator.remove();
         }
     }
 
-    public void Agendar(){
+    public void Agendar() throws EntradaInesperadaException {
+        Scanner scanner = new Scanner(System.in);
+
         for (LocalDateTime verificar: Datas.listaSolicitacaoCliente) {
-            System.out.println("Aprovar agendamento de " + verificar + "?");
+            System.out.println("Aprovar agendamento de " + verificar + "? (sim/nao)");
+
             if (scanner.nextLine().equals("sim".toLowerCase())) {
                 Datas.listaDatasConfirmadas.add(verificar);
+            } else {
+                throw new EntradaInesperadaException("Entrada Inesperada! Favor, tente novamente seguindo as instruções do menu.");
             }
         }
     }
 
-    public void Remover(){
+    public void Remover() throws DataNaoEncontradaException {
+        Scanner scanner = new Scanner(System.in);
+
         System.out.println("Digite 'solicitar' para remover datas da lista geral ou Digite 'confirmado' para remover da lista de confirmação");
-        if (scanner.nextLine().equals("solicitar".toLowerCase())) {
-            LocalDateTime dateTime = LocalDateTime.parse(scanner.nextLine(), formatter);
-            for (LocalDateTime data: Datas.listaSolicitacaoCliente) {
-                if (dateTime == data) {
-                    Datas.listaSolicitacaoCliente.remove(data);
-                }
+
+        String escolha = scanner.nextLine();
+        LocalDateTime dateTime = LocalDateTime.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+
+        if (escolha.equalsIgnoreCase("solicitar")) {
+            if (!Datas.listaSolicitacaoCliente.remove(dateTime)) {
+                throw new DataNaoEncontradaException("Data não encontrada em nossa Agenda");
             }
-        } else if (scanner.nextLine().equals("confirmado".toLowerCase())) {
-            LocalDateTime dateTime = LocalDateTime.parse(scanner.nextLine(), formatter);
-            for (LocalDateTime data: Datas.listaDatasConfirmadas) {
-                if (dateTime == data) {
-                    Datas.listaDatasConfirmadas.remove(data);
-                }
+        } else if (escolha.equalsIgnoreCase("confirmado")) {
+            if (!Datas.listaDatasConfirmadas.remove(dateTime)) {
+                throw new DataNaoEncontradaException("Data não encontrada em nossa Agenda");
             }
         }
     }
@@ -55,17 +63,17 @@ public class AgendamentoAdm {
         return cliente;
     }
 
-    public void setCliente(Cliente cliente) {
+    public AgendamentoAdm setCliente(Cliente cliente) {
         this.cliente = cliente;
+        return this;
     }
 
     public Administrador getAdm() {
         return adm;
     }
 
-    public void setAdm(Administrador adm) {
+    public AgendamentoAdm setAdm(Administrador adm) {
         this.adm = adm;
+        return this;
     }
-
-
 }

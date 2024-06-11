@@ -3,35 +3,59 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Digite o nome do administrador:");
+        String nomeAdmin = scanner.nextLine();
+        System.out.println("Digite a idade do administrador:");
+        int idadeAdmin = scanner.nextInt();
+        System.out.println("Digite o CPF do administrador:");
+        int cpfAdmin = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Digite a senha do administrador:");
+        String senhaAdmin = scanner.nextLine();
 
-        Administrador admin = new Administrador("Pâmella", 19, 123456789);
-        admin.setSenha("admin123");
+        Administrador admin = new Administrador(nomeAdmin, idadeAdmin, cpfAdmin).setSenha(senhaAdmin);
 
-        Cliente cliente = new Cliente("Maria", 20);
-        cliente.setEmail("maria@example.com");
-        cliente.setSenha(1234);
-        cliente.setQuantidadeCriancas(2);
+        System.out.println("Digite o nome do cliente:");
+        scanner.nextLine();
+        String nomeCliente = scanner.nextLine();
+        System.out.println("Digite a idade do cliente:");
+        int idadeCliente = scanner.nextInt();
+        System.out.println("Digite o email do cliente:");
+        scanner.nextLine();
+        String emailCliente = scanner.nextLine();
+        System.out.println("Digite a senha do cliente:");
+        String senhaCliente = scanner.nextLine();
+        System.out.println("Digite a quantidade de crianças do cliente:");
+        int quantidadeCriancas = scanner.nextInt();
 
-        Criancas crianca1 = new Criancas("Laninha", 10);
-        Criancas crianca2 = new Criancas("Darth Vader", 1);
-        cliente.adicionarCrianca(crianca1);
-        cliente.adicionarCrianca(crianca2);
+        Cliente cliente = new Cliente(nomeCliente, idadeCliente)
+                .setEmail(emailCliente)
+                .setSenha(senhaCliente)
+                .setQuantidadeCriancas(quantidadeCriancas);
 
-        AgendamentoAdm agendamentoAdm = new AgendamentoAdm();
-        agendamentoAdm.setAdm(admin);
+        for (int i = 0; i < quantidadeCriancas; i++) {
+            scanner.nextLine();
+            System.out.println("Digite o nome da criança " + (i + 1) + ":");
+            String nomeCrianca = scanner.nextLine();
+            System.out.println("Digite a idade da criança " + (i + 1) + ":");
+            int idadeCrianca = scanner.nextInt();
+            Criancas crianca = new Criancas(nomeCrianca, idadeCrianca);
+            cliente.adicionarCrianca(crianca);
+        }
 
-        agendamentoAdm.AbrirEvento("Festa de Aniversário");
-        agendamentoAdm.AbrirEvento("Caça ao Tesouro");
-
+        AgendamentoAdm agendamentoAdm = new AgendamentoAdm()
+                .setAdm(admin)
+                .AbrirEvento("Festa de Aniversário", 20)
+                .AbrirEvento("Caça ao Tesouro", 6);
         AgendamentoCliente agendamentoCliente = new AgendamentoCliente();
-
         boolean running = true;
 
         while (running) {
-            System.out.println("Menu Principal");
-            System.out.println("1. Entrar como Administrador");
-            System.out.println("2. Entrar como Cliente");
-            System.out.println("3. Encerrar");
+            System.out.println("""
+                    ==== Menu Principal =====
+                    1. Entrar como Administrador
+                    2. Entrar como Cliente
+                    3. Encerrar""");
 
             int mainChoice = scanner.nextInt();
             scanner.nextLine();
@@ -40,19 +64,21 @@ public class Main {
                 case 1:
                     boolean adminMenu = true;
                     while (adminMenu) {
-                        System.out.println("Menu Administrador");
-                        System.out.println("1. Exibir Eventos");
-                        System.out.println("2. Limpar Inscrições de Eventos");
-                        System.out.println("3. Voltar ao Menu Principal");
+                        System.out.println("""
+                                ==== Menu Administrador ====
+                                1. Exibir Eventos
+                                2. Limpar Inscrições de Eventos
+                                3. Mostrar Inscritos nos Eventos
+                                4. Voltar ao Menu Principal""");
 
                         int adminChoice = scanner.nextInt();
                         scanner.nextLine();
 
                         switch (adminChoice) {
                             case 1:
-                                System.out.println("Eventos disponíveis:");
+                                System.out.println("==== Eventos disponíveis ====");
                                 for (String evento : Datas.listaEventosGerais) {
-                                    System.out.println(evento);
+                                    System.out.println(" - " + evento);
                                 }
                                 System.out.println();
                                 break;
@@ -60,10 +86,15 @@ public class Main {
                                 System.out.println("Limpando inscrições de eventos...");
                                 agendamentoAdm.limparInscritosEventos();
                                 System.out.println("Eventos e inscritos após limpeza:");
-                                agendamentoCliente.mostrarEventosEInscritos();
+                                agendamentoCliente.mostrarInscritosEvento();
                                 System.out.println();
                                 break;
                             case 3:
+                                System.out.println("==== Inscritos nos eventos ====");
+                                agendamentoCliente.mostrarInscritosEvento();
+                                System.out.println();
+                                break;
+                            case 4:
                                 adminMenu = false;
                                 break;
                             default:
@@ -74,7 +105,7 @@ public class Main {
                 case 2:
                     boolean clienteMenu = true;
                     while (clienteMenu) {
-                        System.out.println("Menu Cliente");
+                        System.out.println("==== Menu Cliente ====");
                         System.out.println("1. Exibir Crianças");
                         System.out.println("2. Exibir Eventos");
                         System.out.println("3. Inscrever Criança em Evento");
@@ -88,19 +119,19 @@ public class Main {
 
                         switch (clienteChoice) {
                             case 1:
-                                System.out.println("Crianças cadastradas no sistema:");
+                                System.out.println("==== Crianças cadastradas ====");
                                 cliente.exibirCriancas();
                                 System.out.println();
                                 break;
                             case 2:
-                                System.out.println("Eventos disponíveis:");
+                                System.out.println("==== Eventos disponíveis ====");
                                 for (String evento : Datas.listaEventosGerais) {
-                                    System.out.println(evento);
+                                    System.out.println(" - " + evento);
                                 }
                                 System.out.println();
                                 break;
                             case 3:
-                                System.out.println("Inscrever criança em evento");
+                                System.out.println("==== Inscrever criança em evento ====");
                                 System.out.println("Digite o nome do evento:");
                                 String evento = scanner.nextLine();
                                 System.out.println("Digite o nome da criança:");
@@ -115,13 +146,13 @@ public class Main {
                                 System.out.println();
                                 break;
                             case 5:
-                                System.out.println("Digite a data para solicitar remoção do agendamento (dd/MM/yyyy HH:mm):");
+                                System.out.println("Digite a data para solicitar remoção (dd/MM/yyyy HH:mm):");
                                 String dataRemocao = scanner.nextLine();
                                 agendamentoCliente.solicitarRemocao(dataRemocao);
                                 System.out.println();
                                 break;
                             case 6:
-                                System.out.println("Solicitações de agendamento:");
+                                System.out.println("==== Solicitações de agendamento ====");
                                 agendamentoCliente.exibirSolicitacoes();
                                 System.out.println();
                                 break;
@@ -134,28 +165,12 @@ public class Main {
                     }
                     break;
                 case 3:
+                    System.out.println("Encerrando o programa...");
                     running = false;
                     break;
                 default:
                     System.out.println("Opção inválida. Tente novamente.");
             }
         }
-        scanner.close();
-
-//        Cliente cliente = new Cliente("Romario", 46);
-//
-//        AgendamentoCliente agendamentoCliente = new AgendamentoCliente();
-//        AgendamentoAdm agendamentoAdm = new AgendamentoAdm();
-//
-//        agendamentoCliente.requerirAgendamento("11/02/2025 15:30");
-//        agendamentoAdm.Agendar();
-//
-//        int vagas = agendamentoAdm.AbrirEvento("sla", 3);
-//
-//        agendamentoCliente.inscricaoEventos("sla", "Mario");
-//
-//        agendamentoCliente.mostrarEventos(vagas);
-//
-//        System.out.println(Datas.listaInscricaoNosEventos);
     }
 }
